@@ -59,4 +59,78 @@ function CreateEmployee(){
     });
 }
 
-CreateManager();
+
+
+
+function CreatEngineer(){
+    const questions = [
+        {
+            type: "input",
+            name: "name",
+            message: "What is  Your Engineer Name?",
+        },
+
+        {
+            type: "input",
+            name: "id",
+            message: "What is  Your Engineer id?",
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is your Engineer email?"
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "What's your Engineer GitHub?"
+        }
+    ];
+    inquirer.prompt(questions).then(function (response){
+        console.log(response);
+
+        const engineer = new Engineer(response.name,response.id,response.eamail,response.github);
+        teammbers,push(engineer)
+        createEmployee();
+    // //create Engineer
+    //     const manager = new Engineer(response.name,response.id,response.email,response.GitHub);
+    //     teammbers.push(manager);
+    //     CreatEngineer();
+    });
+}
+
+
+function createIntern(){
+    const questions =[
+        {
+            type: "input",
+            name: "name",
+            message: "What is  Your Intern name?",
+        },
+
+        {
+            type: "input",
+            name: "id",
+            message: "What is  Your Intern id?",
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is your Internm email?"
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "What's your Intern school?"
+        }
+    ];
+    inquirer.createPromptModule(questions).then(function(response){
+        console.log(response);
+        const intern = new intern(response.name,response.id,response.email,response.school);
+        teammbers.push(intern);
+        createEmployee();
+        
+    });
+}
+
+CreateManager(); 
