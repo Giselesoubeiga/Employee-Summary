@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const Engineer = require("./lib/Engineer");
 const Manager = require("./lib/Manager");
+const Intern = require("./lib/Intern");
 
 var teammbers = [];
 //setup the questions
@@ -62,7 +63,7 @@ function CreateEmployee(){
 
 
 
-function CreatEngineer(){
+function CreateEngineer(){
     const questions = [
         {
             type: "input",
@@ -100,7 +101,7 @@ function CreatEngineer(){
 }
 
 
-function createIntern(){
+function CreateIntern(){
     const questions =[
         {
             type: "input",
@@ -133,4 +134,4 @@ function createIntern(){
     });
 }
 
-CreateManager(); 
+CreateManager();  
