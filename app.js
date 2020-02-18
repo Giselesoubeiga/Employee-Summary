@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const Engineer = require("./lib/Engineer");
-const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
 
 var teammbers = [];
 //setup the questions
@@ -50,88 +50,99 @@ function CreateEmployee(){
         console.log(response);
         if (response.employeeType == "Engineer") {
             //create engineer
-            console.log("we are creating an engineer");
+           CreateEngineer();
         } else if (response.employeeType == "Intern") {
             //create inter
-            console.log("we are creating an intern");
+            CreateIntern();
         } else {
             console.log("Stopped creating employee");
+            console.log("-----------");
+            console.table(teammbers); 
+
         }
     });
 }
-
-
-
 
 function CreateEngineer(){
     const questions = [
         {
             type: "input",
             name: "name",
-            message: "What is  Your Engineer Name?",
+            message: "What's Your Engineer Name? "
         },
-
         {
             type: "input",
             name: "id",
-            message: "What is  Your Engineer id?",
+            message: "What's Your Engineer id? "
         },
         {
             type: "input",
             name: "email",
-            message: "What is your Engineer email?"
+            message: "What's Your Engineer email? "
         },
         {
             type: "input",
             name: "github",
-            message: "What's your Engineer GitHub?"
+            message: "What's Your Engineer github? "
         }
-    ];
-    inquirer.prompt(questions).then(function (response){
-        console.log(response);
-
-        const engineer = new Engineer(response.name,response.id,response.eamail,response.github);
-        teammbers,push(engineer)
-        createEmployee();
-    // //create Engineer
-    //     const manager = new Engineer(response.name,response.id,response.email,response.GitHub);
-    //     teammbers.push(manager);
-    //     CreatEngineer();
+    ];       
+    inquirer.prompt(questions).then(function (resp) {
+        console.log(resp);
+        const engineer = new Engineer(resp.name,resp.id,resp.email,resp.github);
+         teammbers.push(engineer);
+         CreateEmployee();
     });
 }
 
-
 function CreateIntern(){
-    const questions =[
+    const questions = [
         {
             type: "input",
             name: "name",
-            message: "What is  Your Intern name?",
+            message: "What's Your Intern Name? "
         },
-
         {
             type: "input",
             name: "id",
-            message: "What is  Your Intern id?",
+            message: "What's Your Intern id? "
         },
         {
             type: "input",
             name: "email",
-            message: "What is your Internm email?"
+            message: "What's Your Intern email? "
         },
         {
             type: "input",
-            name: "github",
-            message: "What's your Intern school?"
+            name: "school",
+            message: "What's Your Intern school? "
         }
-    ];
-    inquirer.createPromptModule(questions).then(function(response){
-        console.log(response);
-        const intern = new intern(response.name,response.id,response.email,response.school);
-        teammbers.push(intern);
-        createEmployee();
-        
+    ];       
+    inquirer.prompt(questions).then(function (resp) {
+        console.log(resp);
+        const intern = new Intern(resp.name,resp.id,resp.email,resp.school);
+         teammbers.push(intern);
+         CreateEmployee();
     });
 }
 
-CreateManager();  
+function BuildHtml(){
+    var html="";
+    teammbers.forEach(employee=>{
+        //build the html and add it to the html variable
+        html+= `<div class="card employee-card m-3">
+        <div class="card-header bg-primary m-0 p-2 text-light">
+            <h2 class="card-title">${employee.name}</h2>
+            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${employee.getRole()}</h3>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">ID: </li>
+                <li class="list-group-item">Email: <a href=""></a></li>
+                <li class="list-group-item">Office number: </li>
+            </ul>
+        </div>
+    </div>`
+    })
+}
+
+CreateManager();
